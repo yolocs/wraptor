@@ -1,0 +1,52 @@
+version: 2
+
+before:
+  hooks:
+    - 'go mod tidy'
+
+builds:
+  -
+    env:
+      - 'CGO_ENABLED=0'
+      - 'GO111MODULE=on'
+      - 'GOPROXY=https://proxy.golang.org,direct'
+    mod_timestamp: '{{ .CommitTimestamp }}'
+    flags:
+      - '-a'
+      - '-trimpath'
+    ldflags:
+      - '-s'
+      - '-w'
+      - '-X={{ .ModulePath }}/internal/version.name=repo-template-go'
+      - '-X={{ .ModulePath }}/internal/version.version={{ .Version }}'
+      - '-X={{ .ModulePath }}/internal/version.commit={{ .Commit }}'
+      - '-extldflags=-static'
+    goos:
+      - 'darwin'
+      - 'linux'
+      - 'windows'
+    goarch:
+      - 'amd64'
+      - 'arm64'
+    binary: 'repo-template-go'
+    main: './cmd/repo-template-go'
+
+archives:
+  - formats:
+      - 'tar.gz'
+    name_template: 'repo-template-go_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+    format_overrides:
+      - goos: 'windows'
+        formats:
+          - 'zip'
+
+checksum:
+  name_template: 'repo-template-go_{{ .Version }}_SHA512SUMS'
+  algorithm: 'sha512'
+
+changelog:
+  use: 'github'
+
+release:
+  draft: false
+  mode: 'replace'
