@@ -8,7 +8,7 @@ import (
 	"syscall"
 
 	"github.com/abcxyz/pkg/logging"
-	"github.com/yolocs/repo-template-go/pkg/commands"
+	"github.com/yolocs/wraptor/pkg/commands"
 )
 
 func main() {

@@ -9,7 +9,7 @@ var (
 	// Name is the name of the binary.
 	name string
 	Name = valueOrFallback(name, func() string {
-		return "repo-template-go"
+		return "wraptor"
 	})
 
 	// Version is the main package version.
