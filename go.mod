@@ -1,4 +1,4 @@
-module github.com/yolocs/repo-template-go
+module github.com/yolocs/wraptor
 
 go 1.25
 

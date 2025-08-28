@@ -3,7 +3,7 @@
 ## Build/publish a container quickly (No Docker needed)
 
 1. Install https://ko.build/install/
-2. `KO_DOCKER_REPO=[REPLACE_WITH_REPO] ko build ./cmd/repo-template-go --platform=all`
+2. `KO_DOCKER_REPO=[REPLACE_WITH_REPO] ko build ./cmd/wraptor --platform=all`
 
 ## Deploy to Cloud Run
 
