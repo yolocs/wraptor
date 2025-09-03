@@ -10,10 +10,10 @@ import (
 
 var rootCmd = func() cli.Command {
 	return &cli.RootCommand{
-		Name:     "wraptor",
-		Version:  "dev",
+		Name:    "wraptor",
+		Version: "dev",
 		Commands: map[string]cli.CommandFactory{
-			// See https://github.com/abcxyz/pkg/blob/main/cli for more details.
+			"wrap": func() cli.Command { return &WrapCommand{} },
 		},
 	}
 }
