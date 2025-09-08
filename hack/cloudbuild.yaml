@@ -1,33 +1,34 @@
 steps:
-# Create cache directory with proper permissions
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - 'mkdir -p /workspace/wraptor-cache && chmod 777 /workspace/wraptor-cache'
-  dir: '/workspace'
+  # Create cache directory with proper permissions
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - "mkdir -p /workspace/wraptor-cache && chmod 777 /workspace/wraptor-cache"
+    dir: "/workspace"
 
-- name: 'us-docker.pkg.dev/yolocs02/images/wraptor:v0-local'
-  args: [
-    'wrap',
-    '-image',
-    'us-docker.pkg.dev/yolocs02/images/${_MODEL_NAME}:vllm',
-    '-source',
-    '${_MODEL_REPO}',
-    '-file-prefix',
-    '/model/',
-    '-base',
-    'us-docker.pkg.dev/yolocs02/images/vllm:latest',
-    '-cache-dir',
-    '/workspace/wraptor-cache',
-    ]
-  dir: '/workspace'
+  - name: "us-docker.pkg.dev/yolocs02/images/wraptor:v0-local"
+    args:
+      [
+        "wrap",
+        "-image",
+        "us-docker.pkg.dev/yolocs02/hack/${_MODEL_NAME}:vllm",
+        "-source",
+        "${_MODEL_REPO}",
+        "-file-prefix",
+        "/model/",
+        "-base",
+        "us-docker.pkg.dev/yolocs02/images/vllm:latest",
+        "-cache-dir",
+        "/workspace/wraptor-cache",
+      ]
+    dir: "/workspace"
 
-timeout: '1800s'
+timeout: "1800s"
 
 options:
-  machineType: 'E2_HIGHCPU_8'
+  machineType: "E2_HIGHCPU_8"
 
 substitutions:
-  _MODEL_NAME: 'qwen3-1.7b'
-  _MODEL_REPO: 'Qwen/Qwen3-1.7B'
+  _MODEL_NAME: "qwen3-1.7b"
+  _MODEL_REPO: "Qwen/Qwen3-1.7B"
